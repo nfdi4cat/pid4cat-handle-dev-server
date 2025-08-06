@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "protocolVersion": "2.11",
+  "serialNumber": 1,
+  "primarySite": true,
+  "multiPrimary": false,
+  "attributes": [
+    {
+      "name": "desc",
+      "value": "{{ SITE_DESCRIPTION }}"
+    }
+  ],
+  "servers": [
+    {
+      "serverId": 1,
+      "address": "{{ HANDLE_HOST_IP }}",
+      "publicKey": {
+        "format": "base64",
+        "value": "{{ SERVER_PUBLIC_KEY_DSA_BASE64 }}"
+      },
+      "interfaces": [
+{% if NO_UDP_RESOLUTION == "no" %}        {
+          "query": true,
+          "admin": false,
+          "protocol": "UDP",
+          "port": 2641
+        },
+{% endif %}        {
+          "query": true,
+          "admin": true,
+          "protocol": "TCP",
+          "port": 2641
+        },
+        {
+          "query": true,
+          "admin": true,
+          "protocol": "HTTP",
+          "port": 8000
+        }
+      ]
+   }
+  ]
+}

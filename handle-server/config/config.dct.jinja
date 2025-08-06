@@ -1,0 +1,96 @@
+{
+  "hdl_http_config" = {
+    "bind_address" = "{{ BIND_ADDRESS }}"
+    "num_threads" = "{{ HTTP_NUM_THREADS }}"
+    "bind_port" = "{{ HTTP_BIND_PORT }}"
+    "log_accesses" = "{{ LOG_ACCESSES }}"
+{% if BACKLOG %}    "backlog" = "{{ BACKLOG }}"
+{% endif %}{% if BIND_ADDRESS_V6 %}    "bind_address_v6" = "{{ BIND_ADDRESS_V6 }}"
+{% endif %}{% if LISTEN_ADDRESS %}    "listen_address" = "{{ LISTEN_ADDRESS }}"
+{% endif %}{% if ALLOW_CORS %}    "allow_cors" = "{{ ALLOW_CORS }}"
+{% endif %}{% if CORS_ORIGINS %}    "cors_origins" = "{{ CORS_ORIGINS }}"
+{% endif %}{% if HTTPS_ENABLED %}    "https_enabled" = "{{ HTTPS_ENABLED }}"
+{% endif %}{% if HTTPS_PORT %}    "https_port" = "{{ HTTPS_PORT }}"
+{% endif %}{% if HTTP_LOG_FORMAT %}    "http_log_format" = "{{ HTTP_LOG_FORMAT }}"
+{% endif %}{% if MAX_REQUEST_SIZE %}    "max_request_size" = "{{ MAX_REQUEST_SIZE }}"
+{% endif %}{% if SESSION_TIMEOUT %}    "session_timeout" = "{{ SESSION_TIMEOUT }}"
+{% endif %}{% if ADMIN_PATH %}    "admin_path" = "{{ ADMIN_PATH }}"
+{% endif %}  }
+
+  "server_type" = "server"
+{% if NO_UDP_RESOLUTION == "no" %}
+  "hdl_udp_config" = {
+    "bind_address" = "{{ BIND_ADDRESS }}"
+    "num_threads" = "{{ NUM_THREADS }}"
+    "bind_port" = "{{ BIND_PORT }}"
+    "log_accesses" = "{{ LOG_ACCESSES }}"
+{% if BACKLOG %}    "backlog" = "{{ BACKLOG }}"
+{% endif %}{% if BIND_ADDRESS_V6 %}    "bind_address_v6" = "{{ BIND_ADDRESS_V6 }}"
+{% endif %}{% if LISTEN_ADDRESS %}    "listen_address" = "{{ LISTEN_ADDRESS }}"
+{% endif %}  }
+{% endif %}
+
+  "hdl_tcp_config" = {
+    "bind_address" = "{{ BIND_ADDRESS }}"
+    "num_threads" = "{{ NUM_THREADS }}"
+    "bind_port" = "{{ BIND_PORT }}"
+    "log_accesses" = "{{ LOG_ACCESSES }}"
+{% if BACKLOG %}    "backlog" = "{{ BACKLOG }}"
+{% endif %}{% if BIND_ADDRESS_V6 %}    "bind_address_v6" = "{{ BIND_ADDRESS_V6 }}"
+{% endif %}{% if LISTEN_ADDRESS %}    "listen_address" = "{{ LISTEN_ADDRESS }}"
+{% endif %}  }
+
+  "log_save_config" = {
+    "log_save_directory" = "{{ LOG_SAVE_DIRECTORY }}"
+    "log_save_interval" = "{{ LOG_SAVE_INTERVAL }}"
+  }
+
+  "no_udp_resolution" = "{{ NO_UDP_RESOLUTION }}"
+  "interfaces" = (
+{% if NO_UDP_RESOLUTION == "no" %}    "hdl_udp"
+{% endif %}    "hdl_tcp"
+    "hdl_http"
+  )
+
+  "server_config" = {
+    "server_admins" = (
+      {{ SERVER_ADMINS }}
+    )
+
+    "replication_admins" = (
+      {{ REPLICATION_ADMINS }}
+    )
+
+    "max_session_time" = "{{ MAX_SESSION_TIME }}"
+    "this_server_id" = "{{ THIS_SERVER_ID }}"
+    "max_auth_time" = "{{ MAX_AUTH_TIME }}"
+    "server_admin_full_access" = "{{ SERVER_ADMIN_FULL_ACCESS }}"
+    "allow_na_admins" = "{{ ALLOW_NA_ADMINS }}"
+    "template_ns_override" = "{{ TEMPLATE_NS_OVERRIDE }}"
+    "case_sensitive" = "{{ CASE_SENSITIVE }}"
+{% if AUTO_HOMED_PREFIXES %}    "auto_homed_prefixes" = (
+      {{ AUTO_HOMED_PREFIXES }}
+    )
+{% endif %}{% if MAX_HANDLES %}    "max_handles" = "{{ MAX_HANDLES }}"
+{% endif %}{% if MAX_VALUES %}    "max_values" = "{{ MAX_VALUES }}"
+{% endif %}{% if TRACE_RESOLUTION %}    "trace_resolution" = "{{ TRACE_RESOLUTION }}"
+{% endif %}{% if ALLOW_LIST_HDLS %}    "allow_list_hdls" = "{{ ALLOW_LIST_HDLS }}"
+{% endif %}{% if ALLOW_RECURSION %}    "allow_recursion" = "{{ ALLOW_RECURSION }}"
+{% endif %}
+
+{% if STORAGE_TYPE == "sql" %}
+    storage_type = "{{ STORAGE_TYPE }}"
+
+    sql_settings = {
+      sql_url = "{{ SQL_URL }}"
+      sql_driver = "{{ SQL_DRIVER }}"
+      sql_login = "{{ SQL_LOGIN }}"
+      sql_passwd = "{{ SQL_PASSWD }}"
+      sql_read_only = "{{ SQL_READ_ONLY }}"
+    }
+{% else %}
+    storage_type = "{{ STORAGE_TYPE }}"
+{% endif %}
+  }
+
+}

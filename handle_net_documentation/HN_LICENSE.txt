@@ -1,0 +1,710 @@
+© COPYRIGHT 2025 Corporation for National Research Initiatives (CNRI);
+All rights reserved.
+
+The HANDLE.NET software is made available subject to the
+Handle.Net Public License Agreement, which may be obtained at
+https://hdl.handle.net/20.1000/136 or hdl:20.1000/136
+
+
+A. HANDLE.NET PUBLIC LICENSE AGREEMENT (Ver.3)
+
+This Handle.Net Public License Agreement (Ver.3) ("License Agreement")
+is between Corporation for National Research Initiatives ("CNRI"),
+having an office at 1895 Preston White Drive, Reston, VA 20191-5434,
+and the Individual or Organization ("Licensee") that has accessed,
+installed or otherwise used the software owned by CNRI called
+HANDLE.NET® and its included documentation ("HDL Software")
+(collectively the "Parties"). Licensee shall be deemed to have entered
+into, signed and agreed to be bound by the terms and conditions of
+this License Agreement upon such access, installation or other use.
+
+1.  License: Subject to the terms and conditions set forth herein,
+CNRI hereby grants to Licensee a non-exclusive, royalty-free,
+worldwide license to use, reproduce, distribute, perform and/or
+display publicly, and prepare derivative works based on the HDL
+Software, and to authorize others to do so, in source or binary form.
+CNRI and Licensee acknowledge and agree that the HDL Software has not
+been especially made or especially adapted to use in combination with
+any particular software or product.  Accordingly, CNRI shall have no
+liability for or in connection with Licensee's use of the HDL Software
+in any such combination.
+
+2.  Conditions of License: Any exercise of the rights granted herein
+is subject to the following requirements:
+
+  a. The HDL Software made available by CNRI to Licensee hereunder,
+  and any software or other work that is based on or incorporates all
+  or any part of the HDL Software, whether retained by Licensee, or
+  made available to others, shall include CNRI's copyright notice and
+  this Handle.Net Public License Agreement (Ver.3) in the HDL Software
+  itself at LICENSE.txt or in any derivative version thereof prepared
+  by Licensee. The grant of these rights is further conditioned on
+  Licensee's agreement to require every sub-licensee or other person
+  or entity ("Other Party") authorized to exercise any of the rights
+  granted herein to include CNRI's copyright notice and this License
+  Agreement in similar fashion in any version of the HDL Software,
+  modified or unmodified, that is used, reproduced, distributed,
+  performed and/or displayed publicly, or adapted by such Other Party
+  or by any licensee of such Other Party.
+
+  b. Licensee hereby acknowledges that CNRI has included specific
+  third-party software with the HDL Software ("third-party
+  software"). Licensee hereby acknowledges and agrees that this
+  License Agreement conveys no right, title or interest to Licensee by
+  CNRI in any such third-party software and that it is Licensee's sole
+  obligation to comply with all conditions of the licenses covering
+  use of such third-party software. A list of the third-party software
+  license agreements is included in the HDL Software at LICENSE.txt
+  and should be retained therein when the HDL Software is used alone,
+  or in any derivative version prepared by Licensee.
+
+  c. Licensee may not exercise any of the rights granted herein for or
+  in connection with the establishment or operation by Licensee alone,
+  or in cooperation with any other person, of a system of identifier
+  and/or resolution services that disrupts the integrity of the
+  Handle.Net Registry or the Global Handle Registry ("GHR") in any
+  manner.
+
+  d. In the event that Licensee alone, or in cooperation with any
+  other party, wishes to provide identifier and/or resolution services
+  that use or are based on the HDL Software ("Services"), and, unless
+  otherwise agreed to in writing between the Parties, then as a
+  material condition of this License Agreement, Licensee must enter
+  into and maintain in effect a Service Agreement with CNRI for
+  authorization to provide such Services and be allotted a prefix for
+  this purpose. Licensee should visit CNRI's Handle.Net Registry
+  website at: http://handle.net for information on how to enter into a
+  Service Agreement and obtain a prefix. Alternatively, Licensee may
+  enter into a service agreement and obtain a prefix from an
+  organization other than CNRI that has been authorized and
+  credentialed by the DONA Foundation to provide GHR Services; and
+  information on such organizations is available at the DONA
+  Foundation website at: https://dona.net/mpas .
+
+  e. If Licensee institutes litigation against any entity (including a
+  cross-claim or counterclaim in a lawsuit) alleging that the HDL
+  Software infringes Licensee's proprietary rights, then this License
+  Agreement and any license granted hereunder, shall automatically
+  terminate as of the date such litigation is filed.
+
+3.  Updates to HDL Software: CNRI, at its sole discretion, may provide
+updates to the HDL Software, and CNRI will post any such updates at:
+http://handle.net. With respect to such updates to the HDL Software,
+it is Licensee's sole responsibility to install such updates promptly.
+
+4.  Trademarks: Handle.Net, Hdl.Net, HDL and CNRI are trademarks of
+CNRI; and Global Handle Registry, GHR, Handle System and DONA are
+trademarks of the DONA Foundation ("Trademarks"). The Trademarks may
+not be used in a trademark sense or to endorse or promote any
+software, services or products of Licensee, or any third party.
+
+5.  Disclaimer of Warranties: CNRI IS PROVIDING THE HDL SOFTWARE ON AN
+"AS IS" BASIS. CNRI EXPRESSLY DISCLAIMS AND EXCLUDES ALL WARRANTIES,
+INCLUDING, WITHOUT LIMITATION, WARRANTIES OF MERCHANTABILITY, OF
+SATISFACTORY QUALITY, OR OF FITNESS FOR A PARTICULAR PURPOSE OR
+USE. CNRI MAKES NO REPRESENTATION AND DISCLAIMS ANY WARRANTY THAT THE
+HDL SOFTWARE, AND ANY MODIFICATIONS OR ENHANCEMENTS THEREOF OR
+DERIVATIVE WORKS BASED THEREON, WILL NOT INFRINGE ANY PATENT,
+COPYRIGHT, TRADEMARK, TRADE SECRET OR OTHER PROPRIETARY RIGHT.
+
+6.  Limitation on Liability: CNRI WILL NOT BE LIABLE TO LICENSEE OR
+THIRD PARTIES FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY CHARACTER
+INCLUDING, WITHOUT LIMITATION, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES, LOSS OF USER DATA OR PROFITS, OR BUSINESS INTERRUPTION,
+HOWEVER CAUSED AND ON ANY THEORY OF CONTRACT, WARRANTY, TORT
+(INCLUDING BUT NOT LIMITED TO NEGLIGENCE AND INFRINGEMENT OR
+MISAPPROPRIATION OF INTELLECTUAL PROPERTY RIGHTS), PRODUCT LIABILITY
+OR OTHERWISE, BASED ON OR ARISING IN ANY WAY OUT OF THE PERFORMANCE OF
+THE RIGHTS AND OBLIGATIONS OF THE PARTIES UNDER THIS HANDLE.NET PUBLIC
+LICENSE AGREEMENT (Ver.3), EVEN IF CNRI IS ADVISED OR IS OTHERWISE
+AWARE OF THE POSSIBILITY OF SUCH DAMAGES.
+
+7.  License Agreement Versions: CNRI may publish revised and/or new
+versions of the Handle.Net Public License Agreement from time to time.
+Each version will be given a distinguishing version number.  Once HDL
+Software has been made available under a particular version, Licensee
+may continue to use it under the terms of that version.  No one other
+than CNRI has the right to modify the terms of the License Agreement.
+
+8.  Export Restrictions: The HDL Software provided to Licensee under
+this License Agreement, and any updates to the HDL Software, may be
+subject to export or import laws and/or regulations in the United
+States and in other countries. Licensee agrees to comply with such
+laws and regulations and shall be responsible for obtaining any and
+all required export and import documentation.
+
+9.  Termination: This License Agreement may be terminated, at CNRI's
+sole discretion, upon a material breach of its terms and conditions by
+Licensee.
+
+10.  General: To the extent United States Federal law is not
+applicable, this License Agreement shall be governed by and
+interpreted in all respects in accordance with the law of the
+Commonwealth of Virginia, excluding Virginia conflict of law
+provisions, and the courts within such State shall be the only courts
+of competent jurisdiction. Nothing in this License Agreement shall be
+deemed to create any relationship of agency, partnership, or joint
+venture between CNRI and Licensee.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+B. Third-party Licenses
+
+1. Berkeley DB Java Edition software version 7
+
+Copyright © 2002, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License")
+available at:
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied.  See the License for the specific language governing
+permissions and limitations under the License.
+
+====================================================================
+
+2. ASM: a very small and fast Java bytecode manipulation framework
+distributed with Berkeley DB JE
+
+Copyright © 2000-2005 INRIA, France Telecom
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holders nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE.
+
+====================================================================
+
+3. Berkeley DB Java Edition software version 4.1.27
+
+Copyright © 2002, 2012 Oracle and/or its affiliates.  All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. Redistributions in any form must be accompanied by information on
+   how to obtain complete source code for the DB software and any
+   accompanying software that uses the DB software.  The source code
+   must either be included in the distribution or be available for no
+   more than the cost of distribution plus a nominal fee, and must be
+   freely redistributable under reasonable conditions.  For an
+   executable file, complete source code means the source code for all
+   modules it contains.  It does not include source code for modules or
+   files that typically accompany the major components of the operating
+   system on which the executable file runs.
+
+THIS SOFTWARE IS PROVIDED BY ORACLE ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR
+NON-INFRINGEMENT, ARE DISCLAIMED.  IN NO EVENT SHALL ORACLE BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+====================================================================
+
+4. The Java Transaction API (JTA)
+
+Copyright © 2006 Sun Microsystems, Inc. All rights reserved.
+
+Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
+Version 1.0: https://oss.oracle.com/licenses/CDDL
+
+Source available at http://central.maven.org/maven2/javax/transaction/jta/1.1/
+
+========================================================================
+
+5. Bouncy Castle License
+
+Copyright © 2000 - 2024 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+========================================================================
+
+6. Google GSON
+
+Copyright © 2008-2023 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+========================================================================
+
+7. Apache Commons Codec
+
+Apache Commons Codec
+
+Copyright © 2002-2020 The Apache Software Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+src/test/org/apache/commons/codec/language/DoubleMetaphoneTest.java
+contains test data from http://aspell.net/test/orig/batch0.tab.
+Copyright © 2002 Kevin Atkinson (kevina@gnu.org)
+
+The content of package org.apache.commons.codec.language.bm has been translated
+from the original php source code available at http://stevemorse.org/phoneticinfo.htm
+with permission from the original authors.
+Original source copyright:
+Copyright © 2008 Alexander Beider & Stephen P. Morse.
+
+==================================================================
+
+8. SLF4J
+
+Copyright (c) 2004-2025 QOS.ch
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==============================================================
+
+9. Jetty Web Container
+
+Copyright (c) 1995-2019 Mort Bay Consulting Pty Ltd and others.
+
+Eclipse Jetty, and Jetty are trademarks of the Eclipse Foundation.
+
+All contributions are the property of the respective authors or of
+entities to which copyright has been assigned by the authors (eg. employer).
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+==============================================================
+
+10. The javax.servlet package
+
+Copyright © 1997-2011 Oracle and/or its affiliates. All rights reserved.
+
+Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
+Version 1.0: https://oss.oracle.com/licenses/CDDL
+
+Source available at https://github.com/javaee/servlet-spec
+
+==================================================================
+
+11. CIDRUtils
+
+Copyright © 2013 Edin Dazdarevic (edin.dazdarevic@gmail.com)
+
+CIDRUtils is released under MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+==================================================================
+
+12. AtomicFile
+
+Copyright © 2009 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+==================================================================
+
+13. OSHI
+
+https://github.com/oshi/oshi
+
+Copyright (c) 2010-2023 The OSHI Project Contributors: https://github.com/oshi/oshi/graphs/contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+==============================================================
+
+14. jQuery
+
+This product includes software developed by the jQuery Foundation.
+
+Copyright © 2013 jQuery Foundation and other contributors
+http://jquery.com/
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-
+INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==================================================================
+
+15. Twitter Bootstrap
+
+This product includes software developed by Twitter, Inc.
+
+ Copyright © 2012 Twitter, Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+==================================================================
+
+16. AmplifyJS
+
+This product includes software developed by appendTo LLC.
+
+Copyright © 2013 appendTo LLC. (http://appendto.com/team)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-
+INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==================================================================
+
+17. PolyCrypt
+
+Copyright  ©  Raytheon BBN Technologies Corp. 2013 All Rights Reserved.
+
+Development of this software program, WHAC, is sponsored by the Cyber
+Security Division of the United States Department of Homeland
+Security's Science and Technology Directorate.
+
+This software is licensed pursuant to the following license terms and
+conditions: Redistribution and use in source and binary forms, with or
+without modification, are permitted provided that the following
+conditions are met: (1) Redistributions of source code must retain the
+above copyright notice, this list of conditions and the following
+disclaimer. (2) Redistributions in binary form must reproduce the
+above copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided with
+the distribution. (3) Neither the name of Raytheon BBN Technologies
+Corp. nor the names of its contributors may be used to endorse or
+promote products derived from this software without specific prior
+written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+==================================================================
+
+18. qrcode.js
+
+Licensed under the MIT license.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files
+(the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==================================================================
+
+19. vkbeautify
+
+Licensed under the MIT license.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files
+(the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==================================================================
+
+20. bootstrap-select
+
+Licensed under the MIT license.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files
+(the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+==================================================================
+
+21. ortjs dsa
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+==================================================================
+
+22. Twitter typeahead.js
+
+Copyright  ©  2013-2014 Twitter, Inc
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+==================================================================
+
+23. Gradle
+
+Copyright © 2007-2024 Gradle, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+==================================================================
+
+24. JNA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+

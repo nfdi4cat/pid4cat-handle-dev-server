@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: handledb
+      POSTGRES_USER: handleuser
+      POSTGRES_PASSWORD: handlepass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./handle-server/storage/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U handleuser -d handledb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  handle_server:
+    image: handle_svr_sql_pg
+    build:
+      context: ./handle-server
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "2641:2641/udp"
+      - "2641:2641/tcp"
+      - "8000:8000/tcp"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SERVER_ADMINS: '300:TEST/ADMIN'
+      REPLICATION_ADMINS: '300:TEST/ADMIN'
+      ALLOW_RECURSION: 'yes'
+      HANDLE_HOST_IP: '127.0.0.1'
+      BIND_ADDRESS: '0.0.0.0'
+      ALLOW_NA_ADMINS: 'no'
+      TEMPLATE_NS_OVERRIDE: 'yes'
+      AUTO_HOMED_PREFIXES: '0.NA/TEST'
+      # SQL Configuration
+      STORAGE_TYPE: 'sql'
+      SQL_URL: 'jdbc:postgresql://postgres:5432/handledb'
+      SQL_DRIVER: 'org.postgresql.Driver'
+      SQL_LOGIN: 'handleuser'
+      SQL_PASSWD: 'handlepass'
+      SQL_READ_ONLY: 'no'
+      # Keys
+      SERVER_PRIVATE_KEY_PEM: "-----BEGIN PRIVATE KEY-----\r\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDhKbcswqONJxKK\r\nR/tI4FeICYY3O+ilk2OKTKLMjcf9KUQz4EkwE/3pfiVTU6eWlAi8aPOcr02IzN/K\r\na5nThX6IFpYxnO/SygjLzEZxFQP6btDk5VXvUfeEkkTRuVdNLtXJyJMBZ8CYN6mZ\r\nCCR9net9aLQudJRWV3AbcPT3PsBYfJl3aU5ulAjfM7GAA21MEYodliKdHOKWX5nf\r\nodygrbpICNXec4lgvmyh4VnZkBVwD+QRJizeyyt/bnnA0PZEmLtrT5/c56/2Q91g\r\nKXUnKcy1P3td+RqTSvP92UO3HXTRS24gNwsqEuucGFwHCK365hJmQWCsrzMFQLz8\r\n/cnmbiwRAgMBAAECggEACz1WGOxy/H2RRRvwc2cxfC3l7rVonyh8yeWz8OwsUFsC\r\nPgJ86ZYh5C+WGBmY4ZRS3R0/ErJeHc1RgYaYBFFJkbkEHWz+vFUcYphem5zHmOio\r\n64T2lagpjlfv1zYLIXDyuCxXoqffdKm/DbYBZLZ6Nh8nJjRPE4IXXrAav/A4hHvE\r\n/mL7xx7ejFW/glforIpgI6baEDBb9J+ytSZfAyB8eAPcsHCuIdP64sXqmiVzgrik\r\nCYK7FGX4llX7C/j2hzy7anPyf1JHfwq1edmGU63smaiOCmYfj7JnimpWpKT+yA5W\r\nOtcNc+pihAU9RenR2n0jkOPhLLzMizqnICRSKu9rnQKBgQD6xYgM9g23AdmX6gzF\r\nApVxtesFnYtgTcy2hJXw/U70+Xug9kkQCEZE8aYOOrZGPRPrEJ+jAHhVc92pp0JD\r\nNBBQe3CLxs2knob3++n2IHFEDQYa5vPgx6/8kI8Acu3WrRd/T8nCWUDNEuMo5zGa\r\n1oecxTyukch34C7wqCc4RwIivQKBgQDl24Abk5qyAXNDOIk/NZPItc/0GKiMBfv7\r\npz4xaJI55kH/YsBSiBTP43iqxF1sEhozd+8WwqE/G1cMTahHvauTkielaXhbaMfq\r\npEU95WqXfMUc47NfYOkOUHWhOMwXBbPRjKhPoU6B5qIlyjZtqQgPa7eBi0M4LMQU\r\nwTbvtZ+N5QKBgQDjvJICm033PhHa2W4BWIhZfQlTzzBtJBpeQuhcs96JsSwqEKBn\r\nk+wk3oOcdotkHEHDfxRKlrmxeQj78m7F0zlhrciW19OXxXPzL27Y27uhPmal9cnS\r\n/+X961ZC5RzDkew97TrgaefklVuAoP02jc8YezLRook4/HoEieEcRbhVzQKBgQCj\r\n9mC6yx61TX2H/ONCOJizuqWdbJ2GTJqD17fwjLSKIqr/XtTrynB2HsArqCkv9vXD\r\nsxDUvn9BQeJlP1wD2NN0T/SB9OtK4UKCKS3PSkAv0WvWAMMqDToR4OkX2SkUXxf3\r\nKYvCScFzvi36IPWUYdgDEAZ1nP6VKrGwUGc8tOUc1QKBgFnieQPmF5KVRcYjjaLL\r\n1gIOs5LbH5hJO2Hk1LnmJbZotSPBYA0EbRCbgB+rqK2Kb1Ptyb1ilG+pLac/BI8n\r\n2vUdHhsQSFqGnVStw7cdPvCusKmxMpYg3+GWTgw76MeofCWdxUGW+ZLq0sk4Jgum\r\na4sRyD9svptvhggdFWmmtiEu\r\n-----END PRIVATE KEY-----"
+      SERVER_PUBLIC_KEY_PEM: "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4Sm3LMKjjScSikf7SOBX\r\niAmGNzvopZNjikyizI3H/SlEM+BJMBP96X4lU1OnlpQIvGjznK9NiMzfymuZ04V+\r\niBaWMZzv0soIy8xGcRUD+m7Q5OVV71H3hJJE0blXTS7VyciTAWfAmDepmQgkfZ3r\r\nfWi0LnSUVldwG3D09z7AWHyZd2lObpQI3zOxgANtTBGKHZYinRzill+Z36HcoK26\r\nSAjV3nOJYL5soeFZ2ZAVcA/kESYs3ssrf255wND2RJi7a0+f3Oev9kPdYCl1JynM\r\ntT97Xfkak0rz/dlDtx100UtuIDcLKhLrnBhcBwit+uYSZkFgrK8zBUC8/P3J5m4s\r\nEQIDAQAB\r\n-----END PUBLIC KEY-----"
+
+volumes:
+  postgres_data:
