@@ -151,6 +151,16 @@ Start the containers from the project root:
 docker compose up --build
 ```
 
+**Note:** The handle_server container build process can take several minutes as it downloads and compiles Java components. To speed up subsequent startups, you can pre-build the handle_server image:
+
+```bash
+# Pre-build the handle_server image (recommended for faster startup)
+docker compose build handle_server
+
+# Then start normally
+docker compose up
+```
+
 Wait for the containers to start up completely.
 You should see log messages indicating the Handle Server is ready and listening on ports 2641 (TCP/UDP) and 8000 (HTTP/HTTPS).
 
