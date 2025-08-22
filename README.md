@@ -429,7 +429,7 @@ python examples/create_handle_examples.py
 ## Acknowledgement
 
 [datacite/docker-handle](https://github.com/datacite/docker-handle) was very helpful to figure out details.
-Here we use more flexible jinja2-templating, support only PostgrSQL for storage and use the latest Handle.Net software (v9.3.2).
+Here we use PostgrSQL for storage (instead of MySQL), the more flexible jinja2-templating and the latest Handle.Net software (v9.3.2).
 
-Created with assistance from Claude Sonnet 4 (Anthropic, accessed August 2025) and Gemini 2.5 Pro (Google, accessed August 2025) via the Claude Code command-line interface, GitHub co-pilot in Visual Studio Code and Warp.
+Created with assistance from Claude Sonnet 4 (Anthropic, accessed August 2025) and Gemini 2.5 Pro (Google, accessed August 2025)  via GitHub co-pilot in Visual Studio Code, via Claude Code command-line interface or via Warp.
 All AI-generated code was reviewed, tested, and validated by the authors.
