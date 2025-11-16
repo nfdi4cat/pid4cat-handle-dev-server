@@ -12,19 +12,18 @@ This Docker setup includes:
 
 Documentation included here:
 
-- Markdown version of [HANDLE.NET (Ver. 9) Technical Manual](./handle_net_documentation/HN_Tech_Manual_9.md)
+- Markdown version of [HANDLE.NET (Ver. 9) Technical Manual](./handle_net_documentation/HN_Technical_Manual_9.md)
 - Markdown version of [Release Notes Handle.Net Version 9.3.2 Software](./handle_net_documentation/HN_v9.3.2_ReleaseNotes.md)
 
-Other source of information:
+Other sources of information:
 
-- Documentation of [pyhandle](https://eudat-b2handle.github.io/PYHANDLE/) library and its [GitHub-repo](https://github.com/eudat-b2handle/PYHANDLE)
+- Documentation for the [PyHandle](https://eudat-b2handle.github.io/PYHANDLE/) library and its [GitHub repo](https://github.com/eudat-b2handle/PYHANDLE)
 
 ## Getting Started
 
-### Step 1: Generate Keypair
+### Step 1: Generate Key Pair
 
-The Handle Server requires PKCS8 format RSA keys for encryption as documented in the Handle.Net Technical Manual, [Section 1.4.1 "Types of Authentication"](./handle_net_documentation/HN_Technical_Manual_9.md#141-types-of-authentication).
-Generate them first before configuring the environment.
+The Handle Server requires PKCS#8-formatted RSA keys for encryption as documented in the Handle.Net Technical Manual, [Section 1.4.1 "Types of Authentication"](./handle_net_documentation/HN_Technical_Manual_9.md#141-types-of-authentication). Generate them before configuring the environment.
 
 **Note for Windows users**: Use Git Bash for OpenSSL commands, as OpenSSL is not available in PowerShell by default.
 
@@ -39,9 +38,9 @@ openssl pkey -in mykey.pem -pubout -out mykey.pem.pub
 ### Step 2: Configure Environment
 
 Before starting the containers, configure any environment settings and provide the keys you generated in Step 1.
-They should be added each in a single line to `docker-compose.yaml` file.
+Add each on a single line to the `docker-compose.yml` file.
 
-To convert the keys into the required format, run in git bash:
+To convert the keys into the required format, run in Git Bash:
 
 ```bash
 # Private key
@@ -88,12 +87,12 @@ You only need to modify these if you want to customize the setup:
 | REPLICATION_ADMINS            | None          | No        | Space-separated list of handle admins for replication e.g. "ADMIN1 ADMIN2 ADMIN3"
 | MAX_SESSION_TIME              | 86400000      | No        | Max authenticated client session time in milliseconds
 | THIS_SERVER_ID                | 1             | No        | An identifier for this handle server
-| MAX_AUTH_TIME                 | 60000         | No        | Max time to wait for client to respond to auth challenge in milliseconds
+| MAX_AUTH_TIME                 | 60000         | No        | Max time to wait for client to respond to authentication challenge in milliseconds
 | SERVER_ADMIN_FULL_ACCESS      | yes           | No        | Admins listed in SERVER_ADMINS will have full permissions over all handles on the server
 | ALLOW_NA_ADMINS               | no            | No        | Allow global handle server admins access to this handle server
 | TEMPLATE_NS_OVERRIDE          | yes           | No        | Allow template namespace override
-| CASE_SENSITIVE                | no            | No        | Are handles case sensitive
-| AUTO_HOMED_PREFIXES           | TEST          | No        | Space-separated list of prefixes that are auto-homed e.g. "0.NA/TEST PREFIX2"
+| CASE_SENSITIVE                | no            | No        | Are handles case-sensitive
+| AUTO_HOMED_PREFIXES           | TEST          | No        | Space-separated list of prefixes that are auto-homed e.g., "0.NA/TEST PREFIX2"
 | MAX_HANDLES                   | None          | No        | Maximum number of handles the server will store
 | MAX_VALUES                    | None          | No        | Maximum number of values per handle
 | TRACE_RESOLUTION              | None          | No        | Enable resolution tracing for debugging
@@ -116,7 +115,7 @@ You only need to modify these if you want to customize the setup:
 
 | Config                        | Default       | Required  | Description
 | ------                        | -------       | --------  | -----------
-| HANDLE_HOST_IP                | 0.0.0.0       | No        | Public handle host IP used for siteinfo
+| HANDLE_HOST_IP                | 0.0.0.0       | No        | Public handle host IP used for siteinfo.json
 | SITE_DESCRIPTION              | Handle Server | No        | Description text for the server in siteinfo.json
 
 **Storage Configuration**
@@ -124,9 +123,9 @@ You only need to modify these if you want to customize the setup:
 | Config                        | Default       | Required  | Description
 | ------                        | -------       | --------  | -----------
 | STORAGE_TYPE                  | sql           | No        | Storage backend type - set to "sql" for PostgreSQL storage
-| SQL_URL                       | None          | No        | JDBC URL that is used to connect to the PostgreSQL database
+| SQL_URL                       | None          | No        | JDBC URL used to connect to the PostgreSQL database
 | SQL_DRIVER                    | org.postgresql.Driver | No | Java class that contains the driver for the JDBC connection
-| SQL_LOGIN                     | postgres      | No        | User name for database connection
+| SQL_LOGIN                     | postgres      | No        | Username for database connection
 | SQL_PASSWD                    | None          | No        | Password for database connection
 | SQL_READ_ONLY                 | no            | No        | Boolean setting for allowing writes to database or not
 
@@ -181,7 +180,7 @@ curl -k "https://127.0.0.1:8000/api/handles/TEST/EXAMPLE001?pretty=yes"
 - `-k`: Tell curl to accept self-signed SSL certificates
 - `?pretty=yes`: Query parameter to get JSON-formatted response
 
-More options are documented in the Handle.Net Technical Manual [section 14.1 Resources](./handle_net_documentation/HN_Technical_Manual_9.md#141-resources).
+More options are documented in the Handle.Net Technical Manual [Section 14.1 Resources](./handle_net_documentation/HN_Technical_Manual_9.md#141-resources).
 
 #### Database Access
 
@@ -258,8 +257,7 @@ This method is reliable, simple, and works consistently across different platfor
 
 ### Using PyHandle Library
 
-The [PyHandle](https://pypi.org/project/pyhandle/) library provides a Python interface that implements the challenge-response framework with digital signatures (uses HS_PUBKEY).
-This complex authentication mechanism cannot be applied with curl alone. It is documented in the Handle.Net Technical Manual, [Section 14.6.4 and following](./handle_net_documentation/HN_Technical_Manual_9.md#1464-authentication-via-authorization-handle).
+The [PyHandle](https://pypi.org/project/pyhandle/) library provides a Python interface that implements the challenge-response framework with digital signatures (using HS_PUBKEY). This complex authentication mechanism cannot be used with curl alone. It is documented in the Handle.Net Technical Manual, [Section 14.6.4 and the following sections](./handle_net_documentation/HN_Technical_Manual_9.md#1464-authentication-via-authorization-handle).
 
 ```bash
 # Activate virtual environment (if using one)
@@ -287,7 +285,7 @@ The web interface allows you to:
 - View existing handles
 - Create new handles
 - Modify handle values
-- Home/Unhome Prefixes
+- Home/Unhome prefixes
 
   ![Web Admin Interface](./handle_net_documentation/webadmin-screenshot.png)
 
@@ -395,7 +393,7 @@ docker compose up --build
 ```
 
 **SSL Certificate Warnings**  
-Normal for development. Use `-k` flag with curl: `curl -k https://127.0.0.1:8000/...`
+Normal for development. Use the `-k` flag with curl: `curl -k https://127.0.0.1:8000/...`
 
 ### Quick Commands Reference
 ```bash
@@ -429,7 +427,7 @@ python examples/create_handle_examples.py
 ## Acknowledgement
 
 [datacite/docker-handle](https://github.com/datacite/docker-handle) was very helpful to figure out details.
-Here we use PostgrSQL for storage (instead of MySQL), the more flexible jinja2-templating and the latest Handle.Net software (v9.3.2).
+Here we use more flexible Jinja2 templating, support only PostgreSQL for storage, and use the latest Handle.Net software (v9.3.2).
 
-Created with assistance from Claude Sonnet 4 (Anthropic, accessed August 2025) and Gemini 2.5 Pro (Google, accessed August 2025)  via GitHub co-pilot in Visual Studio Code, via Claude Code command-line interface or via Warp.
+Created with assistance from Claude Sonnet 4 (Anthropic, accessed August 2025) and Gemini 2.5 Pro (Google, accessed August 2025) via the Claude Code command-line interface, GitHub Copilot in Visual Studio Code, and Warp.
 All AI-generated code was reviewed, tested, and validated by the authors.
