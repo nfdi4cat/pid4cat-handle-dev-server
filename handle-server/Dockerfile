@@ -7,7 +7,6 @@ LABEL Name=handle_server_postgres Version=1.0.0
 CMD ["/sbin/my_init"]
 
 # Update installed APT packages
-RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
 RUN apt-get install -y ntp wget openjdk-11-jdk python3 libpostgresql-jdbc-java
