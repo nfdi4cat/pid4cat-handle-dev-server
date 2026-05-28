@@ -21,6 +21,8 @@ from create_config import (
     format_auto_homed_prefixes,
     build_config,
     convert_pem_to_dsa,
+    parse_jdbc_url,
+    provision_client_pubkey,
     render_template,
     main
 )
@@ -200,7 +202,7 @@ class TestMainFunction(unittest.TestCase):
     @patch('create_config.convert_pem_to_dsa')
     @patch('builtins.open', mock_open())
     @patch('create_config.render_template')
-    def test_main_success(self, mock_render, mock_open_builtin, mock_convert, mock_build_config, mock_jinja_env):
+    def test_main_success(self, mock_render, mock_convert, mock_build_config, mock_jinja_env):
         """Test successful main execution"""
         # Mock config building
         mock_config = {
@@ -280,6 +282,162 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(config["SERVER_ADMINS"], '"300:TEST/ADMIN"')
         self.assertEqual(config["AUTO_HOMED_PREFIXES"], '"TEST"')
         self.assertEqual(config["SQL_URL"], "jdbc:postgresql://postgres:5432/handledb")
+
+
+class TestClientAdminConfig(unittest.TestCase):
+    """Test optional client admin HS_PUBKEY (signature auth) configuration"""
+
+    def test_client_admin_appended_to_server_admins(self):
+        """Client admin id is added to SERVER_ADMINS when a pubkey is set"""
+        env_vars = {
+            "SERVER_ADMINS": "300:TEST/ADMIN",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM":
+                "-----BEGIN PUBLIC KEY-----\nx\n-----END PUBLIC KEY-----",
+        }
+        config = build_config(env_vars)
+        self.assertEqual(
+            config["SERVER_ADMINS"], '"300:TEST/ADMIN" "301:TEST/ADMIN"'
+        )
+        self.assertEqual(config["CLIENT_ADMIN_HANDLE"], "301:TEST/ADMIN")
+        self.assertIsInstance(config["CLIENT_ADMIN_PUBLIC_KEY_PEM"], bytes)
+
+    def test_custom_client_admin_handle(self):
+        """A custom CLIENT_ADMIN_HANDLE controls the added admin id"""
+        env_vars = {
+            "SERVER_ADMINS": "300:TEST/ADMIN",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM": "pem",
+            "CLIENT_ADMIN_HANDLE": "302:TEST/ADMIN",
+        }
+        config = build_config(env_vars)
+        self.assertEqual(
+            config["SERVER_ADMINS"], '"300:TEST/ADMIN" "302:TEST/ADMIN"'
+        )
+
+    def test_no_client_admin_leaves_server_admins(self):
+        """Without a client pubkey, SERVER_ADMINS is unchanged and PEM empty"""
+        env_vars = {"SERVER_ADMINS": "300:TEST/ADMIN"}
+        config = build_config(env_vars)
+        self.assertEqual(config["SERVER_ADMINS"], '"300:TEST/ADMIN"')
+        self.assertEqual(config["CLIENT_ADMIN_PUBLIC_KEY_PEM"], b"")
+
+    def test_client_admin_not_duplicated(self):
+        """An already-listed client admin id is not added twice"""
+        env_vars = {
+            "SERVER_ADMINS": "300:TEST/ADMIN 301:TEST/ADMIN",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM": "pem",
+        }
+        config = build_config(env_vars)
+        self.assertEqual(
+            config["SERVER_ADMINS"], '"300:TEST/ADMIN" "301:TEST/ADMIN"'
+        )
+
+
+class TestParseJdbcUrl(unittest.TestCase):
+    """Test JDBC URL parsing"""
+
+    def test_parse_full_url(self):
+        self.assertEqual(
+            parse_jdbc_url("jdbc:postgresql://postgres:5432/handledb"),
+            ("postgres", 5432, "handledb"),
+        )
+
+    def test_parse_default_port(self):
+        self.assertEqual(
+            parse_jdbc_url("jdbc:postgresql://db/handledb"),
+            ("db", 5432, "handledb"),
+        )
+
+
+class TestProvisionClientPubkey(unittest.TestCase):
+    """Test HS_PUBKEY provisioning into the SQL storage backend"""
+
+    @patch("create_config.convert_pem_to_dsa")
+    def test_provision_upserts_hs_pubkey(self, mock_convert):
+        """The converted key blob is upserted at the parsed index/handle"""
+        mock_convert.return_value = b"BLOB"
+
+        mock_psycopg2 = MagicMock()
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_psycopg2.connect.return_value = mock_conn
+        mock_conn.__enter__.return_value = mock_conn
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cur
+        # Make Binary identifiable while preserving the wrapped value
+        mock_psycopg2.Binary.side_effect = lambda b: ("BIN", b)
+
+        env_vars = {
+            "SQL_URL": "jdbc:postgresql://postgres:5432/handledb",
+            "SQL_LOGIN": "handleuser",
+            "SQL_PASSWD": "handlepass",
+        }
+
+        with patch.dict("sys.modules", {"psycopg2": mock_psycopg2}):
+            provision_client_pubkey(
+                b"PEM", "301:TEST/ADMIN", "/bin/hdl-convert-key", env_vars
+            )
+
+        mock_convert.assert_called_once_with(b"PEM", "/bin/hdl-convert-key")
+        mock_psycopg2.connect.assert_called_once_with(
+            host="postgres", port=5432, dbname="handledb",
+            user="handleuser", password="handlepass",
+        )
+        _, params = mock_cur.execute.call_args[0]
+        self.assertEqual(params[0], ("BIN", b"TEST/ADMIN"))
+        self.assertEqual(params[1], 301)
+        self.assertEqual(params[2], ("BIN", b"HS_PUBKEY"))
+        self.assertEqual(params[3], ("BIN", b"BLOB"))
+        mock_conn.close.assert_called_once()
+
+
+class TestMainClientProvisioning(unittest.TestCase):
+    """Test that main wires up client admin provisioning correctly"""
+
+    @patch("create_config.provision_client_pubkey")
+    @patch("create_config.render_template")
+    @patch("builtins.open", mock_open())
+    @patch("create_config.convert_pem_to_dsa")
+    @patch("create_config.build_config")
+    def test_main_provisions_when_client_key_set(
+        self, mock_build, mock_convert, mock_render, mock_provision
+    ):
+        """provision_client_pubkey is called when a client pubkey is present"""
+        mock_build.return_value = {
+            "SERVER_PRIVATE_KEY_PEM": b"priv",
+            "SERVER_PUBLIC_KEY_PEM": b"pub",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM": b"clientpub",
+            "CLIENT_ADMIN_HANDLE": "301:TEST/ADMIN",
+        }
+        mock_convert.side_effect = [b"privdsa", b"pubdsa"]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            main("/handle/bin", tmpdir, "/config")
+
+        mock_provision.assert_called_once()
+        args = mock_provision.call_args[0]
+        self.assertEqual(args[0], b"clientpub")
+        self.assertEqual(args[1], "301:TEST/ADMIN")
+
+    @patch("create_config.provision_client_pubkey")
+    @patch("create_config.render_template")
+    @patch("builtins.open", mock_open())
+    @patch("create_config.convert_pem_to_dsa")
+    @patch("create_config.build_config")
+    def test_main_skips_provision_without_client_key(
+        self, mock_build, mock_convert, mock_render, mock_provision
+    ):
+        """provision_client_pubkey is not called when no client pubkey is set"""
+        mock_build.return_value = {
+            "SERVER_PRIVATE_KEY_PEM": b"priv",
+            "SERVER_PUBLIC_KEY_PEM": b"pub",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM": b"",
+            "CLIENT_ADMIN_HANDLE": "301:TEST/ADMIN",
+        }
+        mock_convert.side_effect = [b"privdsa", b"pubdsa"]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            main("/handle/bin", tmpdir, "/config")
+
+        mock_provision.assert_not_called()
 
 
 if __name__ == '__main__':
