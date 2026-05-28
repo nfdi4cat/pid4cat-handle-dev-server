@@ -39,6 +39,16 @@ def build_config(env_vars=None):
     def getenv(key, default=""):
         return env_vars.get(key, default)
 
+    # An optional client admin public key (HS_PUBKEY) enables signature
+    # (challenge-response) auth alongside the default HS_SECKEY basic auth.
+    # Its identity must be a server admin to be authorized for writes, so it
+    # is appended to SERVER_ADMINS automatically when provided.
+    server_admins = getenv("SERVER_ADMINS")
+    client_admin_pubkey_pem = getenv("CLIENT_ADMIN_PUBLIC_KEY_PEM")
+    client_admin_handle = getenv("CLIENT_ADMIN_HANDLE", "301:TEST/ADMIN")
+    if client_admin_pubkey_pem and client_admin_handle not in server_admins.split():
+        server_admins = (server_admins + " " + client_admin_handle).strip()
+
     # Build base configuration
     config = {
         # Interface Configuration
@@ -54,7 +64,7 @@ def build_config(env_vars=None):
         "ALLOW_RECURSION": getenv("ALLOW_RECURSION"),
 
         # Server Configuration
-        "SERVER_ADMINS": format_admin_list(getenv("SERVER_ADMINS")),
+        "SERVER_ADMINS": format_admin_list(server_admins),
         "REPLICATION_ADMINS": format_admin_list(getenv("REPLICATION_ADMINS")),
         "MAX_SESSION_TIME": getenv("MAX_SESSION_TIME", "86400000"),
         "THIS_SERVER_ID": getenv("THIS_SERVER_ID", "1"),
@@ -82,6 +92,14 @@ def build_config(env_vars=None):
         # Security Keys (encoded as bytes for subprocess)
         "SERVER_PRIVATE_KEY_PEM": getenv("SERVER_PRIVATE_KEY_PEM").encode("ASCII"),
         "SERVER_PUBLIC_KEY_PEM": getenv("SERVER_PUBLIC_KEY_PEM").encode("ASCII"),
+        # Optional client admin public key for signature (challenge-response)
+        # auth, provisioned as an HS_PUBKEY value (see provision_client_pubkey)
+        "CLIENT_ADMIN_PUBLIC_KEY_PEM": (
+            client_admin_pubkey_pem.encode("ASCII")
+            if client_admin_pubkey_pem
+            else b""
+        ),
+        "CLIENT_ADMIN_HANDLE": client_admin_handle,
 
         # Storage Configuration
         "STORAGE_TYPE": getenv("STORAGE_TYPE"),
@@ -136,6 +154,78 @@ def convert_pem_to_dsa(pem_data, hdl_convert_cmd):
         return dsa_data
 
 
+def parse_jdbc_url(sql_url):
+    """Parse a jdbc:postgresql://host:port/dbname URL into (host, port, dbname).
+
+    Args:
+        sql_url: JDBC PostgreSQL URL, e.g. jdbc:postgresql://postgres:5432/handledb
+
+    Returns:
+        tuple: (host, port, dbname); port defaults to 5432 when absent.
+    """
+    netloc = sql_url.split("://", 1)[-1]
+    hostport, _, dbname = netloc.partition("/")
+    host, _, port = hostport.partition(":")
+    return host, int(port) if port else 5432, dbname
+
+
+def provision_client_pubkey(pubkey_pem, client_admin_handle, hdl_convert_cmd,
+                            env_vars):
+    """Upsert the client admin public key as an HS_PUBKEY handle value.
+
+    Converts the PEM to the Handle binary public-key format with
+    hdl-convert-key and writes it into the SQL storage backend at the
+    index:handle given by client_admin_handle (e.g. "301:TEST/ADMIN"), so a
+    client holding the matching private key can authenticate via the CNRI
+    signature challenge-response flow. The existing HS_SECKEY (basic auth) is
+    left untouched.
+
+    Args:
+        pubkey_pem: Client admin public key PEM as bytes.
+        client_admin_handle: Target value as "{index}:{handle}".
+        hdl_convert_cmd: Path to the hdl-convert-key executable.
+        env_vars: Environment mapping providing SQL_URL/SQL_LOGIN/SQL_PASSWD.
+    """
+    blob = convert_pem_to_dsa(pubkey_pem, hdl_convert_cmd)
+    index_str, _, handle = client_admin_handle.partition(":")
+    host, port, dbname = parse_jdbc_url(env_vars.get("SQL_URL", ""))
+
+    import psycopg2  # noqa: PLC0415 - optional dep, only used when provisioning
+
+    conn = psycopg2.connect(
+        host=host,
+        port=port,
+        dbname=dbname,
+        user=env_vars.get("SQL_LOGIN", "postgres"),
+        password=env_vars.get("SQL_PASSWD", ""),
+    )
+    try:
+        with conn, conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO handles (
+                    handle, idx, type, data, ttl_type, ttl, timestamp,
+                    admin_read, admin_write, pub_read, pub_write
+                )
+                VALUES (%s, %s, %s, %s, 0, 86400,
+                        EXTRACT(epoch FROM now())::int,
+                        true, true, true, false)
+                ON CONFLICT (handle, idx) DO UPDATE
+                SET type = EXCLUDED.type,
+                    data = EXCLUDED.data,
+                    pub_read = EXCLUDED.pub_read;
+                """,
+                (
+                    psycopg2.Binary(handle.encode("UTF-8")),
+                    int(index_str),
+                    psycopg2.Binary(b"HS_PUBKEY"),
+                    psycopg2.Binary(blob),
+                ),
+            )
+    finally:
+        conn.close()
+
+
 def render_template(template_name, output_path, config, jinja_env):
     """Render a Jinja2 template to file
 
@@ -186,6 +276,15 @@ def main(handle_bin, out_dir, config_dir=None):
 
         # Add base64 encoded public key for siteinfo
         config["SERVER_PUBLIC_KEY_DSA_BASE64"] = base64.b64encode(public_key_dsa).decode("ASCII")
+
+        # Optionally provision a client admin HS_PUBKEY for signature auth
+        if config.get("CLIENT_ADMIN_PUBLIC_KEY_PEM"):
+            provision_client_pubkey(
+                config["CLIENT_ADMIN_PUBLIC_KEY_PEM"],
+                config["CLIENT_ADMIN_HANDLE"],
+                handle_convert_cmd,
+                os.environ,
+            )
 
     except subprocess.CalledProcessError as e:
         print(f"Error converting keys: {e}", file=sys.stderr)
