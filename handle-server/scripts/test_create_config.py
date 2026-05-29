@@ -331,6 +331,33 @@ class TestClientAdminConfig(unittest.TestCase):
             config["SERVER_ADMINS"], '"300:TEST/ADMIN" "301:TEST/ADMIN"'
         )
 
+    def test_literal_escapes_in_pubkey_become_newlines(self):
+        """Literal \\r\\n escapes (from the compose default) become newlines"""
+        env_vars = {
+            "SERVER_ADMINS": "300:TEST/ADMIN",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM":
+                "-----BEGIN PUBLIC KEY-----\\r\\nBODY\\r\\n"
+                "-----END PUBLIC KEY-----",
+        }
+        config = build_config(env_vars)
+        self.assertEqual(
+            config["CLIENT_ADMIN_PUBLIC_KEY_PEM"],
+            b"-----BEGIN PUBLIC KEY-----\nBODY\n-----END PUBLIC KEY-----",
+        )
+
+    def test_real_newlines_in_pubkey_preserved(self):
+        """A PEM already using real newlines is passed through unchanged"""
+        env_vars = {
+            "SERVER_ADMINS": "300:TEST/ADMIN",
+            "CLIENT_ADMIN_PUBLIC_KEY_PEM":
+                "-----BEGIN PUBLIC KEY-----\nBODY\n-----END PUBLIC KEY-----",
+        }
+        config = build_config(env_vars)
+        self.assertEqual(
+            config["CLIENT_ADMIN_PUBLIC_KEY_PEM"],
+            b"-----BEGIN PUBLIC KEY-----\nBODY\n-----END PUBLIC KEY-----",
+        )
+
 
 class TestParseJdbcUrl(unittest.TestCase):
     """Test JDBC URL parsing"""

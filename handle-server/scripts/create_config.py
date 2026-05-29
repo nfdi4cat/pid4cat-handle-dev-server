@@ -45,6 +45,15 @@ def build_config(env_vars=None):
     # is appended to SERVER_ADMINS automatically when provided.
     server_admins = getenv("SERVER_ADMINS")
     client_admin_pubkey_pem = getenv("CLIENT_ADMIN_PUBLIC_KEY_PEM")
+    if client_admin_pubkey_pem:
+        # The compose default carries newlines as literal "\r\n" escapes because
+        # Compose ${VAR:-default} interpolation cannot hold a multi-line default.
+        # Restore real newlines so the PEM is valid for hdl-convert-key. Values
+        # supplied with real newlines (e.g. the registry's generated key passed
+        # via process env) are unaffected.
+        client_admin_pubkey_pem = client_admin_pubkey_pem.replace(
+            "\\r\\n", "\n"
+        ).replace("\\n", "\n")
     client_admin_handle = getenv("CLIENT_ADMIN_HANDLE", "301:TEST/ADMIN")
     if client_admin_pubkey_pem and client_admin_handle not in server_admins.split():
         server_admins = (server_admins + " " + client_admin_handle).strip()

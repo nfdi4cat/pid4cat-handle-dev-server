@@ -49,13 +49,20 @@ services:
       # Keys
       SERVER_PRIVATE_KEY_PEM: "-----BEGIN PRIVATE KEY-----\r\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDhKbcswqONJxKK\r\nR/tI4FeICYY3O+ilk2OKTKLMjcf9KUQz4EkwE/3pfiVTU6eWlAi8aPOcr02IzN/K\r\na5nThX6IFpYxnO/SygjLzEZxFQP6btDk5VXvUfeEkkTRuVdNLtXJyJMBZ8CYN6mZ\r\nCCR9net9aLQudJRWV3AbcPT3PsBYfJl3aU5ulAjfM7GAA21MEYodliKdHOKWX5nf\r\nodygrbpICNXec4lgvmyh4VnZkBVwD+QRJizeyyt/bnnA0PZEmLtrT5/c56/2Q91g\r\nKXUnKcy1P3td+RqTSvP92UO3HXTRS24gNwsqEuucGFwHCK365hJmQWCsrzMFQLz8\r\n/cnmbiwRAgMBAAECggEACz1WGOxy/H2RRRvwc2cxfC3l7rVonyh8yeWz8OwsUFsC\r\nPgJ86ZYh5C+WGBmY4ZRS3R0/ErJeHc1RgYaYBFFJkbkEHWz+vFUcYphem5zHmOio\r\n64T2lagpjlfv1zYLIXDyuCxXoqffdKm/DbYBZLZ6Nh8nJjRPE4IXXrAav/A4hHvE\r\n/mL7xx7ejFW/glforIpgI6baEDBb9J+ytSZfAyB8eAPcsHCuIdP64sXqmiVzgrik\r\nCYK7FGX4llX7C/j2hzy7anPyf1JHfwq1edmGU63smaiOCmYfj7JnimpWpKT+yA5W\r\nOtcNc+pihAU9RenR2n0jkOPhLLzMizqnICRSKu9rnQKBgQD6xYgM9g23AdmX6gzF\r\nApVxtesFnYtgTcy2hJXw/U70+Xug9kkQCEZE8aYOOrZGPRPrEJ+jAHhVc92pp0JD\r\nNBBQe3CLxs2knob3++n2IHFEDQYa5vPgx6/8kI8Acu3WrRd/T8nCWUDNEuMo5zGa\r\n1oecxTyukch34C7wqCc4RwIivQKBgQDl24Abk5qyAXNDOIk/NZPItc/0GKiMBfv7\r\npz4xaJI55kH/YsBSiBTP43iqxF1sEhozd+8WwqE/G1cMTahHvauTkielaXhbaMfq\r\npEU95WqXfMUc47NfYOkOUHWhOMwXBbPRjKhPoU6B5qIlyjZtqQgPa7eBi0M4LMQU\r\nwTbvtZ+N5QKBgQDjvJICm033PhHa2W4BWIhZfQlTzzBtJBpeQuhcs96JsSwqEKBn\r\nk+wk3oOcdotkHEHDfxRKlrmxeQj78m7F0zlhrciW19OXxXPzL27Y27uhPmal9cnS\r\n/+X961ZC5RzDkew97TrgaefklVuAoP02jc8YezLRook4/HoEieEcRbhVzQKBgQCj\r\n9mC6yx61TX2H/ONCOJizuqWdbJ2GTJqD17fwjLSKIqr/XtTrynB2HsArqCkv9vXD\r\nsxDUvn9BQeJlP1wD2NN0T/SB9OtK4UKCKS3PSkAv0WvWAMMqDToR4OkX2SkUXxf3\r\nKYvCScFzvi36IPWUYdgDEAZ1nP6VKrGwUGc8tOUc1QKBgFnieQPmF5KVRcYjjaLL\r\n1gIOs5LbH5hJO2Hk1LnmJbZotSPBYA0EbRCbgB+rqK2Kb1Ptyb1ilG+pLac/BI8n\r\n2vUdHhsQSFqGnVStw7cdPvCusKmxMpYg3+GWTgw76MeofCWdxUGW+ZLq0sk4Jgum\r\na4sRyD9svptvhggdFWmmtiEu\r\n-----END PRIVATE KEY-----"
       SERVER_PUBLIC_KEY_PEM: "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4Sm3LMKjjScSikf7SOBX\r\niAmGNzvopZNjikyizI3H/SlEM+BJMBP96X4lU1OnlpQIvGjznK9NiMzfymuZ04V+\r\niBaWMZzv0soIy8xGcRUD+m7Q5OVV71H3hJJE0blXTS7VyciTAWfAmDepmQgkfZ3r\r\nfWi0LnSUVldwG3D09z7AWHyZd2lObpQI3zOxgANtTBGKHZYinRzill+Z36HcoK26\r\nSAjV3nOJYL5soeFZ2ZAVcA/kESYs3ssrf255wND2RJi7a0+f3Oev9kPdYCl1JynM\r\ntT97Xfkak0rz/dlDtx100UtuIDcLKhLrnBhcBwit+uYSZkFgrK8zBUC8/P3J5m4s\r\nEQIDAQAB\r\n-----END PUBLIC KEY-----"
-      # Optional client admin PUBLIC key (non-secret test key). When set,
-      # create_config.py provisions it as HS_PUBKEY at CLIENT_ADMIN_HANDLE
-      # (default 301:TEST/ADMIN) and adds that identity to SERVER_ADMINS,
-      # enabling CNRI signature (challenge-response) auth alongside the
-      # default HS_SECKEY basic auth. The matching private key is supplied by
-      # the client (e.g. the registry's ./secrets/test_handle_private_key.pem).
-      CLIENT_ADMIN_PUBLIC_KEY_PEM: "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmj1lHOBDsFguU+nIGM2o\r\nxCbLzayTyfiL0cij5Ino1PP0mn1oK6o4RmSzNnJFDJeZzLnqtrZ/Mj3Geq0d86qq\r\nz4gpJVhu13sPm0HRSb5H8uXn41ztHhBCTUjNFCvmVvQ6iWSqcBPSrwgHHXD7dy9h\r\nD8e9z3b5P0zYmkaiGr/u6laK57IUPKpwLvjfmvir6SV0L5XhG6N6Mh4q70xgxyGt\r\nC+Ml6bK+hAqcE/8naYRW5LwuCUmGmG0MxB1XFeRWGj3hh7LpwBmDeNfA/xJlcXuQ\r\nKXMtO6pYPBSsOUw2r7IPVpAZ/ouPZS1XbzNJeJLWM8BBEzEquqYHba+K2hnWlTBv\r\nBwIDAQAB\r\n-----END PUBLIC KEY-----"
+      # Optional client admin PUBLIC key (non-secret test key). Overridable via
+      # the CLIENT_ADMIN_PUBLIC_KEY_PEM env var (the registry's `just
+      # setup-handle` passes the public half of its generated keypair here). The
+      # baked-in default below documents the expected PEM shape and keeps the
+      # server usable for signature auth when started standalone. It is single-
+      # quoted with literal "\r\n" escapes because Compose ${VAR:-default}
+      # interpolation cannot carry a multi-line default; create_config.py restores
+      # the newlines before use. create_config.py
+      # provisions it as HS_PUBKEY at CLIENT_ADMIN_HANDLE (default 301:TEST/ADMIN)
+      # and adds that identity to SERVER_ADMINS, enabling CNRI signature
+      # (challenge-response) auth alongside the default HS_SECKEY basic auth. The
+      # matching private key is supplied by the client (e.g. the registry's
+      # ./secrets/test_handle_private_key.pem).
+      CLIENT_ADMIN_PUBLIC_KEY_PEM: '${CLIENT_ADMIN_PUBLIC_KEY_PEM:------BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmj1lHOBDsFguU+nIGM2o\r\nxCbLzayTyfiL0cij5Ino1PP0mn1oK6o4RmSzNnJFDJeZzLnqtrZ/Mj3Geq0d86qq\r\nz4gpJVhu13sPm0HRSb5H8uXn41ztHhBCTUjNFCvmVvQ6iWSqcBPSrwgHHXD7dy9h\r\nD8e9z3b5P0zYmkaiGr/u6laK57IUPKpwLvjfmvir6SV0L5XhG6N6Mh4q70xgxyGt\r\nC+Ml6bK+hAqcE/8naYRW5LwuCUmGmG0MxB1XFeRWGj3hh7LpwBmDeNfA/xJlcXuQ\r\nKXMtO6pYPBSsOUw2r7IPVpAZ/ouPZS1XbzNJeJLWM8BBEzEquqYHba+K2hnWlTBv\r\nBwIDAQAB\r\n-----END PUBLIC KEY-----}'
 
 volumes:
   postgres_data:
