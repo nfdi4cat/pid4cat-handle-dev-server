@@ -85,6 +85,8 @@ You only need to modify these if you want to customize the setup:
 | ------                        | -------       | --------  | -----------
 | SERVER_ADMINS                 | None          | No        | Space-separated list of handle admins e.g. "ADMIN1 ADMIN2 ADMIN3"
 | REPLICATION_ADMINS            | None          | No        | Space-separated list of handle admins for replication e.g. "ADMIN1 ADMIN2 ADMIN3"
+| CLIENT_ADMIN_PUBLIC_KEY_PEM   | None          | No        | Optional client admin **public** key (PEM, PKCS8, `\r\n`-escaped single line). When set, it is provisioned as an `HS_PUBKEY` to enable signature (challenge-response) auth alongside basic auth. Unset → basic-auth-only, unchanged. See [Signature Authentication](#signature-authentication-hs_pubkey).
+| CLIENT_ADMIN_HANDLE           | 301:TEST/ADMIN | No       | `index:handle` where the client admin `HS_PUBKEY` is stored and which is added to `SERVER_ADMINS`. Only used when `CLIENT_ADMIN_PUBLIC_KEY_PEM` is set.
 | MAX_SESSION_TIME              | 86400000      | No        | Max authenticated client session time in milliseconds
 | THIS_SERVER_ID                | 1             | No        | An identifier for this handle server
 | MAX_AUTH_TIME                 | 60000         | No        | Max time to wait for client to respond to authentication challenge in milliseconds
@@ -268,6 +270,21 @@ source .venv/bin/activate      # Unix/Linux
 # Run the example script
 python examples/create_handle_examples.py
 ```
+
+### Signature Authentication (HS_PUBKEY)
+
+By default the server provides basic auth via the `HS_SECKEY` at `300:TEST/ADMIN` (password `ASECRETKEY`). To additionally enable CNRI **signature** (challenge-response) authentication — the mechanism stock CNRI servers and production deployments expect — set `CLIENT_ADMIN_PUBLIC_KEY_PEM` to your client admin **public** key (single line with literal `\r\n`, same form as the `SERVER_*_KEY_PEM` values; see the conversion command in [Step 2](#step-2-configure-environment)).
+
+On startup `create_config.py` converts that key with `hdl-convert-key` and stores it as an `HS_PUBKEY` value at `CLIENT_ADMIN_HANDLE` (default `301:TEST/ADMIN`), and appends that identity to `SERVER_ADMINS`. The two credentials coexist — basic auth at index 300 and signature auth at index 301 — so a client then authenticates with the matching **private** key. The feature is opt-in: leaving `CLIENT_ADMIN_PUBLIC_KEY_PEM` unset keeps basic-auth-only behaviour unchanged.
+
+Verify both credentials are present:
+
+```bash
+docker exec pid4cat-handle-dev-server-postgres-1 psql -U handleuser -d handledb \
+  -c "SELECT idx, encode(type,'escape') FROM handles WHERE encode(handle,'escape')='TEST/ADMIN' ORDER BY idx;"
+```
+
+This should list `300 | HS_SECKEY` and `301 | HS_PUBKEY`. Signature auth itself follows the challenge-response flow in Technical Manual [Section 14.6.4 and following](./handle_net_documentation/HN_Technical_Manual_9.md#1464-authentication-via-authorization-handle) (e.g. via PyHandle or the registry's signature client).
 
 ### Accessing the Web Admin GUI
 
