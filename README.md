@@ -13,7 +13,7 @@ This Docker setup includes:
 Documentation included here:
 
 - Markdown version of [HANDLE.NET (Ver. 9) Technical Manual](./handle_net_documentation/HN_Technical_Manual_9.md)
-- Markdown version of [Release Notes Handle.Net Version 9.3.2 Software](./handle_net_documentation/HN_v9.3.2_ReleaseNotes.md)
+- Markdown version of [Release Notes Handle.Net Version 9.3.2 Software](./handle_net_documentation/HN_RELEASE_NOTES_9.3.2.md)
 
 Other sources of information:
 
