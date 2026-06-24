@@ -22,7 +22,7 @@ services:
     build:
       context: ./handle-server
       dockerfile: Dockerfile
-    restart: always
+    restart: on-failure:3
     ports:
       - "2641:2641/udp"
       - "2641:2641/tcp"
