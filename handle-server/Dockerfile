@@ -11,9 +11,8 @@ RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
 RUN apt-get install -y ntp wget openjdk-11-jdk python3 libpostgresql-jdbc-java
 
-# Install pip and Python packages (psycopg2 is optional but helpful for testing or debugging)
-RUN apt-get install -y python3-pip
-RUN pip3 install psycopg2-binary jinja2
+# Python packages: jinja2 renders the server config, psycopg2 provisions HS_PUBKEY
+RUN apt-get install -y python3-jinja2 python3-psycopg2
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
